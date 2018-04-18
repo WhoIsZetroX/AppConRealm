@@ -97,6 +97,15 @@ public class Persona extends RealmObject {
         this.edad = edad;
     }
 
+    public void setAll(int especialId, String id, String dni, String nombre, String apellido, String edad) {
+        this.especialId = especialId;
+        this.id = id;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+    }
+
     @Override
     public String toString() {
         return "Persona{" +

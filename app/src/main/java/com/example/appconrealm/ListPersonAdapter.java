@@ -38,8 +38,8 @@ public class ListPersonAdapter extends RealmBaseAdapter<Persona> implements List
         }
 
         Persona item = adapterData.get(position);
-        viewHolder.txvTitol.setText(item.getNombre());
-        viewHolder.txvVersio.setText(item.getDni());
+        viewHolder.txvTitol.setText(item.getNombre()+" "+item.getApellido());
+        viewHolder.txvVersio.setText("ID: "+item.getId());
 
         return convertView;
     }

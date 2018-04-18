@@ -1,5 +1,6 @@
 package com.example.appconrealm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +9,11 @@ import android.widget.EditText;
 
 import io.realm.Realm;
 
-import static com.example.appconrealm.MainActivity.realm;
-
 public class AddPersonActivity extends AppCompatActivity {
 
     EditText especialId, id, dni, nombre, apellido, edad;
     Button sendData;
+    Realm realm;
 
 
     @Override
@@ -23,6 +23,7 @@ public class AddPersonActivity extends AppCompatActivity {
 
         findViewsByIds();
 
+        realm = Realm.getDefaultInstance();
 
         sendData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +36,8 @@ public class AddPersonActivity extends AppCompatActivity {
                         realm.copyToRealm(persona); // This will do a deep copy of everything
                     }
                 });
+                startActivity(new Intent(AddPersonActivity.this, MainActivity.class));
+                finish();
             }
         });
 
