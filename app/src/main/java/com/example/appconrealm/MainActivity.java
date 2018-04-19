@@ -28,10 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ListView listView;
     FloatingActionButton floatingActionButton;
-    Spinner spinner;
+    Button button;
     Realm realm;
-    String[] items;
-    ArrayAdapter<String> adapter;
     private ListPersonAdapter listPersonAdapter;
     int listViewPos;
     RealmResults<Persona> personas;
@@ -49,36 +47,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewsByIds();
         setOnClicks();
         listView.setLongClickable(true);
-        items = new String[]{"Filtro 1", "Filtro 2"};
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                switch (position) {
-                    case 0:
-                        final RealmResults<Persona> personas = realm.where(Persona.class).findAll();
-                        listPersonAdapter = new ListPersonAdapter(personas);
-                        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
 
-                        break;
-                    case 1:
-                        final RealmResults<Persona> persones = realm.where(Persona.class).findAll();
-                        listPersonAdapter = new ListPersonAdapter(persones);
-                        if(persones.size()>0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
-
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-        });
-
+        final RealmResults<Persona> personas = realm.where(Persona.class).findAll();
+        listPersonAdapter = new ListPersonAdapter(personas);
+        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
+        listPersonAdapter.notifyDataSetChanged();
 
         registerForContextMenu(listView);
 
@@ -87,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
 
                 openContextMenu(parent);
 
@@ -120,19 +92,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     void findViewsByIds(){
-        spinner= findViewById(R.id.spinner);
+        button= findViewById(R.id.button);
         listView = findViewById(R.id.listView);
         floatingActionButton = findViewById(R.id.floatingActionButton);
     }
 
     public void setOnClicks() {
         floatingActionButton.setOnClickListener(this);
+        button.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if ( v == floatingActionButton ) {
             startActivity(new Intent(this, AddPersonActivity.class));
+        } else if (v == button){
+
         }
     }
 

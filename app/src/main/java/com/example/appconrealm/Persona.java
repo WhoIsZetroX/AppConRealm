@@ -17,7 +17,7 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class Persona extends RealmObject {
-    @Ignore
+
     private int especialId;
 
     @PrimaryKey

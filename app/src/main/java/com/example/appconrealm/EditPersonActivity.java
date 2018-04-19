@@ -36,7 +36,7 @@ public class EditPersonActivity extends AppCompatActivity {
 
         if (extras != null) {
             lala = extras.getStringArray("lala");
-            // and get whatever type user account id is
+            System.out.println(Integer.parseInt(lala[0])+" - "+lala[0]+ " - "+lala[1].toString()+lala[2].toString()+lala[3].toString()+lala[4].toString()+lala[5].toString()+" LAAAAAAAAAA");
         }
 
         persona = new Persona(Integer.parseInt(lala[0]),lala[1].toString(),lala[2].toString(),lala[3].toString(),lala[4].toString(),lala[5].toString());
@@ -48,7 +48,6 @@ public class EditPersonActivity extends AppCompatActivity {
         apellido.setHint(persona.getApellido());
         edad.setHint(persona.getEdad());
 
-        //TODO: FALTA QUE SE ACTUALICE EL USUARIO Y QUE PILLE LA ESPECIAL ID
         sendData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,10 +63,13 @@ public class EditPersonActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(edad.getText().toString())){
                     edad.setText(edad.getHint().toString());
                 }
-                persona.setAll(Integer.parseInt(especialId.getText().toString()), especialId.getText().toString(), especialId.getText().toString(), especialId.getText().toString(),especialId.getText().toString(), especialId.getText().toString());
-                realm.beginTransaction();
-                realm.copyToRealmOrUpdate(persona);
-                realm.commitTransaction();
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        persona.setAll(Integer.parseInt(especialId.getText().toString()), id.getText().toString(), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), edad.getText().toString());
+                        realm.copyToRealmOrUpdate(persona);
+                    }
+                });
                 startActivity(new Intent(EditPersonActivity.this, MainActivity.class));
                 finish();
             }
