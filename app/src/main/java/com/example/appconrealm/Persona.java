@@ -21,15 +21,16 @@ public class Persona extends RealmObject {
     private int especialId;
 
     @PrimaryKey
-    private String id;
+    private int id;
 
     @Index
     private String dni;
 
-    private String nombre, apellido, edad;
+    private String nombre, apellido;
+    int edad;
 
 
-    public Persona(int especialId, String id, String dni, String nombre, String apellido, String edad) {
+    public Persona(int especialId, int id, String dni, String nombre, String apellido, int edad) {
         this.especialId = especialId;
         this.id = id;
         this.dni = dni;
@@ -57,11 +58,11 @@ public class Persona extends RealmObject {
         this.especialId = especialId;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -89,15 +90,15 @@ public class Persona extends RealmObject {
         this.apellido = apellido;
     }
 
-    public String getEdad() {
+    public int getEdad() {
         return edad;
     }
 
-    public void setEdad(String edad) {
+    public void setEdad(int edad) {
         this.edad = edad;
     }
 
-    public void setAll(int especialId, String id, String dni, String nombre, String apellido, String edad) {
+    public void setAll(int especialId, int id, String dni, String nombre, String apellido, int edad) {
         this.especialId = especialId;
         this.id = id;
         this.dni = dni;

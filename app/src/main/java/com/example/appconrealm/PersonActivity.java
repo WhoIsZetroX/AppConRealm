@@ -9,14 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import io.realm.Realm;
 
-public class EditPersonActivity extends AppCompatActivity {
-
-    TextView especialId, id;
-    EditText dni, nombre, apellido, edad;
+public class PersonActivity extends AppCompatActivity {
+    TextView especialId, id, dni, nombre, apellido, edad;
+    //EditText dni, nombre, apellido, edad;
     String[] lala;
     Persona persona;
     Button sendData;
@@ -26,7 +23,7 @@ public class EditPersonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_person);
+        setContentView(R.layout.activity_person);
 
         findViewsByIds();
 
@@ -62,19 +59,15 @@ public class EditPersonActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(edad.getText().toString())){
                     edad.setText(edad.getHint().toString());
                 }
-                realm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()));
-                        realm.copyToRealmOrUpdate(persona);
-                    }
-                });
-                startActivity(new Intent(EditPersonActivity.this, MainActivity.class));
-                finish();
+                persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()));
+                Intent i = new Intent(new Intent(PersonActivity.this, EditPersonActivity.class));
+                i.putExtra("lala", new String[]{""+persona.getEspecialId(), ""+persona.getId(), persona.getDni(), persona.getNombre(), persona.getApellido(), ""+persona.getEdad()});
+                startActivity(i);
             }
         });
 
     }
+
     void findViewsByIds(){
         especialId = findViewById(R.id.especialId);
         id = findViewById(R.id.id);
@@ -84,6 +77,12 @@ public class EditPersonActivity extends AppCompatActivity {
         edad = findViewById(R.id.edad);
         sendData = findViewById(R.id.sendData);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(PersonActivity.this, MainActivity.class));
+        finish();
     }
 
 }

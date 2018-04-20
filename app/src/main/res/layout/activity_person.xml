@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PersonActivity">
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/especialId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="especialId"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="id"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/dni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="dni"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="nombre"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/apellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="apellido"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/edad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="edad"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/sendData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit"/>
+
+    </LinearLayout>
+
+</ScrollView>

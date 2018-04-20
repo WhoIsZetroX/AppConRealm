@@ -32,7 +32,7 @@ public class AddPersonActivity extends AppCompatActivity {
                     @Override
                     public void execute(Realm realm) {
                         int especial = Integer.parseInt(especialId.getText().toString());
-                        Persona persona = new Persona(especial,id.getText().toString(),dni.getText().toString(),nombre.getText().toString(),apellido.getText().toString(),edad.getText().toString());
+                        Persona persona = new Persona(especial,Integer.parseInt(id.getText().toString()),dni.getText().toString(),nombre.getText().toString(),apellido.getText().toString(),Integer.parseInt(edad.getText().toString()));
                         realm.copyToRealm(persona); // This will do a deep copy of everything
                     }
                 });
