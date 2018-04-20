@@ -77,10 +77,10 @@ public class ListPersonAdapter extends RealmBaseAdapter<Persona> implements List
                 Persona p = new Persona();
                 personas = realm.where(Persona.class).equalTo("id", Integer.parseInt(viewHolder.btn.getHint().toString())).findAll();
                 realm.beginTransaction();
-                p.setAll(personas.first().getEspecialId(),personas.first().getId(),personas.first().getDni(),personas.first().getNombre(),personas.first().getApellido(),personas.first().getEdad());
+                p.setAll(personas.first().getEspecialId(),personas.first().getId(),personas.first().getDni(),personas.first().getNombre(),personas.first().getApellido(),personas.first().getEdad(),personas.first().getGenero());
                 realm.commitTransaction();
                 intent = new Intent(context, PersonActivity.class);
-                intent.putExtra("lala", new String[]{""+p.getEspecialId(), ""+p.getId(), p.getDni(), p.getNombre(), p.getApellido(), ""+p.getEdad()});
+                intent.putExtra("lala", new String[]{""+p.getEspecialId(), ""+p.getId(), p.getDni(), p.getNombre(), p.getApellido(), ""+p.getEdad(), p.getGenero()});
                 context.startActivity(intent);
 
             }

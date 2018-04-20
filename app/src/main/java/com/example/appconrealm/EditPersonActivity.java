@@ -16,7 +16,7 @@ import io.realm.Realm;
 public class EditPersonActivity extends AppCompatActivity {
 
     TextView especialId, id;
-    EditText dni, nombre, apellido, edad;
+    EditText dni, nombre, apellido, edad, genero;
     String[] lala;
     Persona persona;
     Button sendData;
@@ -38,7 +38,7 @@ public class EditPersonActivity extends AppCompatActivity {
             lala = extras.getStringArray("lala");
         }
 
-        persona = new Persona(Integer.parseInt(lala[0]),Integer.parseInt(lala[1]),lala[2].toString(),lala[3].toString(),lala[4].toString(),Integer.parseInt(lala[5].toString()));
+        persona = new Persona(Integer.parseInt(lala[0]),Integer.parseInt(lala[1]),lala[2].toString(),lala[3].toString(),lala[4].toString(),Integer.parseInt(lala[5].toString()),lala[6].toString());
 
         especialId.setText(persona.getEspecialId()+"");
         id.setText(persona.getId()+"");
@@ -46,6 +46,7 @@ public class EditPersonActivity extends AppCompatActivity {
         nombre.setHint(persona.getNombre());
         apellido.setHint(persona.getApellido());
         edad.setHint(persona.getEdad()+"");
+        genero.setHint(persona.getGenero());
 
         sendData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,10 +63,13 @@ public class EditPersonActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(edad.getText().toString())){
                     edad.setText(edad.getHint().toString());
                 }
+                if (TextUtils.isEmpty(genero.getText().toString())){
+                    genero.setText(genero.getHint().toString());
+                }
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()));
+                        persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()),genero.getText().toString());
                         realm.copyToRealmOrUpdate(persona);
                     }
                 });
@@ -82,6 +86,7 @@ public class EditPersonActivity extends AppCompatActivity {
         nombre = findViewById(R.id.nombre);
         apellido = findViewById(R.id.apellido);
         edad = findViewById(R.id.edad);
+        genero = findViewById(R.id.genero);
         sendData = findViewById(R.id.sendData);
 
     }

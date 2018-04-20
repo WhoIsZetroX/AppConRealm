@@ -12,7 +12,7 @@ import android.widget.TextView;
 import io.realm.Realm;
 
 public class PersonActivity extends AppCompatActivity {
-    TextView especialId, id, dni, nombre, apellido, edad;
+    TextView especialId, id, dni, nombre, apellido, edad, genero;
     //EditText dni, nombre, apellido, edad;
     String[] lala;
     Persona persona;
@@ -35,7 +35,7 @@ public class PersonActivity extends AppCompatActivity {
             lala = extras.getStringArray("lala");
         }
 
-        persona = new Persona(Integer.parseInt(lala[0]),Integer.parseInt(lala[1]),lala[2].toString(),lala[3].toString(),lala[4].toString(),Integer.parseInt(lala[5].toString()));
+        persona = new Persona(Integer.parseInt(lala[0]),Integer.parseInt(lala[1]),lala[2].toString(),lala[3].toString(),lala[4].toString(),Integer.parseInt(lala[5].toString()), lala[6].toString());
 
         especialId.setText(persona.getEspecialId()+"");
         id.setText(persona.getId()+"");
@@ -43,6 +43,7 @@ public class PersonActivity extends AppCompatActivity {
         nombre.setHint(persona.getNombre());
         apellido.setHint(persona.getApellido());
         edad.setHint(persona.getEdad()+"");
+        genero.setHint(persona.getGenero());
 
         sendData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +60,10 @@ public class PersonActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(edad.getText().toString())){
                     edad.setText(edad.getHint().toString());
                 }
-                persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()));
+                if (TextUtils.isEmpty(genero.getText().toString())){
+                    genero.setText(genero.getHint().toString());
+                }
+                persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()),genero.getText().toString());
                 Intent i = new Intent(new Intent(PersonActivity.this, EditPersonActivity.class));
                 i.putExtra("lala", new String[]{""+persona.getEspecialId(), ""+persona.getId(), persona.getDni(), persona.getNombre(), persona.getApellido(), ""+persona.getEdad()});
                 startActivity(i);
@@ -75,6 +79,7 @@ public class PersonActivity extends AppCompatActivity {
         nombre = findViewById(R.id.nombre);
         apellido = findViewById(R.id.apellido);
         edad = findViewById(R.id.edad);
+        genero = findViewById(R.id.genero);
         sendData = findViewById(R.id.sendData);
 
     }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -129,33 +131,27 @@ public class FilterActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 if (s.length()==0){
-                    if (TextUtils.isEmpty(edit2.getText().toString())){
-                        final RealmResults<Persona> personas = realm.where(Persona.class).between("edad", 0, 9999).findAll();
+
+                        final RealmResults<Persona> personas = realm.where(Persona.class).findAll();
                         listPersonAdapter = new ListPersonAdapter(personas);
                         if (personas.size() > 0) listView.setAdapter(listPersonAdapter);
                         listPersonAdapter.notifyDataSetChanged();
-                    }else {
-                        final RealmResults<Persona> personas = realm.where(Persona.class).between("edad", 0, Integer.parseInt(edit2.getText().toString())).findAll();
-                        listPersonAdapter = new ListPersonAdapter(personas);
-                        if (personas.size() > 0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
-                    }
+
                 }else {
-                    if (TextUtils.isEmpty(edit2.getText().toString())){
 
-                        final RealmResults<Persona> personas = realm.where(Persona.class).between("edad",Integer.parseInt(edit1.getText().toString()), 9999).findAll();
+                    try {
+                        int num = Integer.parseInt(edit1.getText().toString());
+                        Log.i("",num+" is a number");
+                        final RealmResults<Persona> personas = realm.where(Persona.class).equalTo("edad",Integer.parseInt(edit1.getText().toString())).findAll();
                         listPersonAdapter = new ListPersonAdapter(personas);
                         if(personas.size()>0) listView.setAdapter(listPersonAdapter);
                         listPersonAdapter.notifyDataSetChanged();
-
-                    } else{
-
-                        final RealmResults<Persona> personas = realm.where(Persona.class).between("edad",Integer.parseInt(edit1.getText().toString()), Integer.parseInt(edit2.getText().toString())).findAll();
-                        listPersonAdapter = new ListPersonAdapter(personas);
-                        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
-
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getApplicationContext(),"Introduce un numero",Toast.LENGTH_SHORT).show();
                     }
+
+
+
                 System.out.println(s.length());
                 }
             }
@@ -172,33 +168,18 @@ public class FilterActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 if (s.length()==0){
-                    if (TextUtils.isEmpty(edit1.getText().toString())){
-                        final RealmResults<Persona> personas = realm.where(Persona.class).between("edad", 0, 9999).findAll();
-                        listPersonAdapter = new ListPersonAdapter(personas);
-                        if (personas.size() > 0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
-                    }else {
-                        final RealmResults<Persona> personas = realm.where(Persona.class).between("edad", Integer.parseInt(edit1.getText().toString()), 9999).findAll();
-                        listPersonAdapter = new ListPersonAdapter(personas);
-                        if (personas.size() > 0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
-                    }
+
+                    final RealmResults<Persona> personas = realm.where(Persona.class).findAll();
+                    listPersonAdapter = new ListPersonAdapter(personas);
+                    if (personas.size() > 0) listView.setAdapter(listPersonAdapter);
+                    listPersonAdapter.notifyDataSetChanged();
+
                 }else {
-                    if (TextUtils.isEmpty(edit1.getText().toString())){
+                    final RealmResults<Persona> personas = realm.where(Persona.class).contains("genero",edit2.getText().toString()).findAll();
+                    listPersonAdapter = new ListPersonAdapter(personas);
+                    if(personas.size()>0) listView.setAdapter(listPersonAdapter);
+                    listPersonAdapter.notifyDataSetChanged();
 
-                        final RealmResults<Persona> personas = realm.where(Persona.class).between("edad",0, Integer.parseInt(edit2.getText().toString())).findAll();
-                        listPersonAdapter = new ListPersonAdapter(personas);
-                        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
-
-                    } else{
-
-                        final RealmResults<Persona> personas = realm.where(Persona.class).between("edad",Integer.parseInt(edit1.getText().toString()), Integer.parseInt(edit2.getText().toString())).findAll();
-                        listPersonAdapter = new ListPersonAdapter(personas);
-                        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
-
-                    }
                     System.out.println(s.length());
                 }
             }
@@ -212,26 +193,7 @@ public class FilterActivity extends AppCompatActivity {
 
     }
 
-  /*  @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-        final RealmResults<Persona> personas = realm.where(Persona.class).greaterThan("edad", seekbar1.getProgress()).and().lessThan("edad",seekbar2.getProgress()).findAll();
-        listPersonAdapter = new ListPersonAdapter(personas);
-        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-        listPersonAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
-    }*/
-
-    void findViewsByIds(){
+     void findViewsByIds(){
         listView = findViewById(R.id.listView);
         textv1= findViewById(R.id.textv1);
         textv2= findViewById(R.id.textv2);

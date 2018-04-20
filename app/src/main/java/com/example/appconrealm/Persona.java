@@ -26,29 +26,20 @@ public class Persona extends RealmObject {
     @Index
     private String dni;
 
-    private String nombre, apellido;
-    int edad;
+    private String nombre, apellido, genero;
+    private int edad;
 
-
-    public Persona(int especialId, int id, String dni, String nombre, String apellido, int edad) {
+    public Persona(int especialId, int id, String dni, String nombre, String apellido, int edad, String genero) {
         this.especialId = especialId;
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
+        this.genero=genero;
     }
 
-    public Persona() {
-        /*
-        this.especialId = especialId;
-        this.id = id;
-        this.dni = dni;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.edad = edad;
-        */
-    }
+    public Persona() {}
 
     public int getEspecialId() {
         return especialId;
@@ -98,24 +89,34 @@ public class Persona extends RealmObject {
         this.edad = edad;
     }
 
-    public void setAll(int especialId, int id, String dni, String nombre, String apellido, int edad) {
+    public void setAll(int especialId, int id, String dni, String nombre, String apellido, int edad, String genero) {
         this.especialId = especialId;
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
+        this.genero=genero;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     @Override
     public String toString() {
         return "Persona{" +
                 "especialId=" + especialId +
-                ", id='" + id + '\'' +
+                ", id=" + id +
                 ", dni='" + dni + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", edad='" + edad + '\'' +
+                ", genero='" + genero + '\'' +
+                ", edad=" + edad +
                 '}';
     }
 }

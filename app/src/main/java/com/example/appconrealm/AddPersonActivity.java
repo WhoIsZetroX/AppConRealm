@@ -11,7 +11,7 @@ import io.realm.Realm;
 
 public class AddPersonActivity extends AppCompatActivity {
 
-    EditText especialId, id, dni, nombre, apellido, edad;
+    EditText especialId, id, dni, nombre, apellido, edad, genero;
     Button sendData;
     Realm realm;
 
@@ -32,7 +32,7 @@ public class AddPersonActivity extends AppCompatActivity {
                     @Override
                     public void execute(Realm realm) {
                         int especial = Integer.parseInt(especialId.getText().toString());
-                        Persona persona = new Persona(especial,Integer.parseInt(id.getText().toString()),dni.getText().toString(),nombre.getText().toString(),apellido.getText().toString(),Integer.parseInt(edad.getText().toString()));
+                        Persona persona = new Persona(especial,Integer.parseInt(id.getText().toString()),dni.getText().toString(),nombre.getText().toString(),apellido.getText().toString(),Integer.parseInt(edad.getText().toString()),genero.getText().toString());
                         realm.copyToRealm(persona); // This will do a deep copy of everything
                     }
                 });
@@ -49,6 +49,7 @@ public class AddPersonActivity extends AppCompatActivity {
         nombre = findViewById(R.id.nombre);
         apellido = findViewById(R.id.apellido);
         edad = findViewById(R.id.edad);
+        genero = findViewById(R.id.genero);
         sendData = findViewById(R.id.sendData);
 
     }
