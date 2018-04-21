@@ -2,7 +2,9 @@ package com.example.appconrealm;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -38,11 +40,12 @@ import static io.realm.internal.SyncObjectServerFacade.getApplicationContext;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ListView listView;
-    FloatingActionButton floatingActionButton;
+    public static ListView listView;
+    FloatingActionButton item_create, item_filter;
+    FloatingActionMenu floatingActionMenu;
     Button button, clearFilter,cerrarPopup;
     Realm realm;
-    private ListPersonAdapter listPersonAdapter;
+    public static ListPersonAdapter listPersonAdapter;
     int listViewPos;
     RealmResults<Persona> personas;
     //public static String id;
@@ -50,10 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static Intent intentViewPerson;
     SeekBar seekbar, seekbar2;
     TextView textv1, textv2;
-    EditText edit1;
-    Spinner edit2;
-    String[] items;
-    ArrayAdapter<String> adapter;
+    EditText edit1, edit2;
 
     // Popup
     private LayoutInflater layoutInflater;
@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         realm = Realm.getDefaultInstance(); // opens "myrealm.realm"
         context_ = getApplicationContext();
-        items = new String[]{"All", "Male", "Female"};
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+
 
         /*realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -122,23 +121,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     void findViewsByIds(){
-        button= findViewById(R.id.button);
+        floatingActionMenu = findViewById(R.id.fab);
         listView = findViewById(R.id.listView);
-        floatingActionButton = findViewById(R.id.floatingActionButton);
+        item_create = findViewById(R.id.item_create);
+        item_filter = findViewById(R.id.item_Filter);
         clearFilter = findViewById(R.id.clearFilter);
     }
 
     public void setOnClicks() {
-        floatingActionButton.setOnClickListener(this);
-        button.setOnClickListener(this);
+//        floatingActionButton.setOnClickListener(this);
+        item_create.setOnClickListener(this);
+        item_filter.setOnClickListener(this);
         clearFilter.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if ( v == floatingActionButton ) {
+        if ( v == item_create ) {
+            floatingActionMenu.close(true);
             startActivity(new Intent(this, AddPersonActivity.class));
-        } else if (v == button){
+        } else if (v == item_filter){
+            floatingActionMenu.close(true);
             abrirPopUp();
             //startActivity(new Intent(MainActivity.this, FilterActivity.class));
         } else if (v == clearFilter){
@@ -154,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listPersonAdapter = new ListPersonAdapter(personas);
         if(personas.size()>0) listView.setAdapter(listPersonAdapter);
         listPersonAdapter.notifyDataSetChanged();*/
-        button.setEnabled(false);
+//        button.setEnabled(false);
         layoutInflater =(LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         popupView = layoutInflater.inflate(R.layout.popup, null);
         popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.MATCH_PARENT,
@@ -162,65 +165,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         opciones();
 
-        cerrarPopup = popupView.findViewById(R.id.cerrarPopup);
-        cerrarPopup.setOnClickListener(new Button.OnClickListener(){
+//        cerrarPopup = popupView.findViewById(R.id.cerrarPopup);
+        /*cerrarPopup.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
                 button.setEnabled(true);
             }
-        });
+        });*/
 
 
-
-
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
         popupWindow.showAtLocation(listView, Gravity.CENTER, 0, 0);
     }
 
-    void opciones(){
+    void opciones() {
 
-        textv1= popupView.findViewById(R.id.textv1);
-        textv2= popupView.findViewById(R.id.textv2);
-        seekbar=(SeekBar) popupView.findViewById(R.id.seekBar);
-        seekbar2=(SeekBar) popupView.findViewById(R.id.seekBar2);
+        textv1 = popupView.findViewById(R.id.textv1);
+        textv2 = popupView.findViewById(R.id.textv2);
+        seekbar = (SeekBar) popupView.findViewById(R.id.seekBar);
+        seekbar2 = (SeekBar) popupView.findViewById(R.id.seekBar2);
         edit1 = popupView.findViewById(R.id.edit1);
         edit2 = popupView.findViewById(R.id.edit2);
 
-        edit2.setAdapter(adapter);
+        textv1.setText(0 + "");
+        textv2.setText(9999 + "");
 
-        textv1.setText(0+"");
-        textv2.setText(9999+"");
+        edit2.addTextChangedListener(new TextWatcher() {
 
-        final RealmResults<Persona> personas = realm.where(Persona.class).findAll();
-        listPersonAdapter = new ListPersonAdapter(personas);
-        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-        listPersonAdapter.notifyDataSetChanged();
+            public void afterTextChanged(Editable s) {
 
-        edit2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position == 0) {
+                if (s.length()==0){
+
                     final RealmResults<Persona> personas = realm.where(Persona.class).findAll();
                     listPersonAdapter = new ListPersonAdapter(personas);
                     if (personas.size() > 0) listView.setAdapter(listPersonAdapter);
                     listPersonAdapter.notifyDataSetChanged();
-                } else if (position == 1) {
-                    final RealmResults<Persona> personas = realm.where(Persona.class).contains("genero","M").findAll();
-                    listPersonAdapter = new ListPersonAdapter(personas);
-                    if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-                    listPersonAdapter.notifyDataSetChanged();
-                }else if (position == 1) {
-                    final RealmResults<Persona> personas = realm.where(Persona.class).contains("genero","F").findAll();
-                    listPersonAdapter = new ListPersonAdapter(personas);
-                    if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-                    listPersonAdapter.notifyDataSetChanged();
+
+                }else {
+
+                        final RealmResults<Persona> personas = realm.where(Persona.class).contains("genero",edit2.getText().toString()).findAll();
+                        listPersonAdapter = new ListPersonAdapter(personas);
+                        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
+                        listPersonAdapter.notifyDataSetChanged();
+
+                    System.out.println(s.length());
                 }
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
