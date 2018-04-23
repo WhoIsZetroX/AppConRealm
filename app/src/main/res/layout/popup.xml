@@ -14,23 +14,84 @@
         android:background="@android:color/holo_blue_dark"
         android:orientation="vertical">
 
-        <EditText
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/edit1"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></LinearLayout>
+        <CheckBox
+            android:id="@+id/nombreC"
+            android:text="Nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+        <TextView
+            android:id="@+id/nombre"
+            android:paddingTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Buscar a alguien por el nombre"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/nombreE"
+            android:hint="Alexander"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/edit2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/edad"
+            android:paddingTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Buscar a alguien con edad exacta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/edadE"
+            android:hint="20"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/genero"
+            android:layout_gravity="center_horizontal"
+            android:text="Buscar por genero [M-F]"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/generoE"
+            android:hint="M-F"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="1"/>
+
+        <TextView
             android:layout_gravity="center_horizontal"
             android:id="@+id/textv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/rangoEdad"
+            android:layout_gravity="center_horizontal"
+            android:text="Buscar a alguien entre dos edades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/edadMin"
+            android:paddingTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Edad minima:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -42,8 +103,10 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/edadMax"
+            android:paddingTop="5dp"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/textv2"
+            android:text="Edad Maxima:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -52,7 +115,9 @@
             android:layout_marginRight="10dp"
             android:id="@+id/seekBar2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:progress="100"/>
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

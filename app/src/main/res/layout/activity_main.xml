@@ -40,6 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
+        app:menu_icon="@android:drawable/ic_dialog_dialer"
         fab:menu_animationDelayPerItem="50"
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
@@ -47,10 +48,9 @@
         fab:menu_colorPressed="#E75043"
         fab:menu_colorRipple="#99FFFFFF"
         fab:menu_fab_hide_animation="@anim/fab_scale_down"
-        fab:menu_fab_label="your_label_here"
+        fab:menu_fab_label=""
         fab:menu_fab_show_animation="@anim/fab_scale_up"
         fab:menu_fab_size="normal"
-        fab:menu_icon="@drawable/fab_add"
         fab:menu_labels_colorNormal="#333333"
         fab:menu_labels_colorPressed="#444444"
         fab:menu_labels_colorRipple="#66FFFFFF"
@@ -83,14 +83,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/fab_add"
-            fab:fab_label="Create person"
+            fab:fab_label=" Create person"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/item_Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@android:drawable/ic_menu_sort_by_size"
             fab:fab_label="Filter"
             fab:fab_size="mini" />
 

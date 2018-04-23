@@ -10,33 +10,21 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import io.realm.SyncConfiguration;
-import io.realm.SyncCredentials;
-import io.realm.SyncUser;
-import io.realm.exceptions.RealmException;
-
-import static io.realm.internal.SyncObjectServerFacade.getApplicationContext;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static Intent intentViewPerson;
     SeekBar seekbar, seekbar2;
     TextView textv1, textv2;
-    EditText edit1, edit2;
+    EditText edit1, edit2, edit3;
 
     // Popup
     private LayoutInflater layoutInflater;
@@ -68,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         context_ = getApplicationContext();
 
 
-        /*realm.executeTransaction(new Realm.Transaction() {
+       /* realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 for (int i = 1; i<7;i++) {
@@ -182,15 +170,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void opciones() {
 
-        textv1 = popupView.findViewById(R.id.textv1);
-        textv2 = popupView.findViewById(R.id.textv2);
+        textv1 = popupView.findViewById(R.id.edadMin);
+        textv2 = popupView.findViewById(R.id.edadMax);
         seekbar = (SeekBar) popupView.findViewById(R.id.seekBar);
         seekbar2 = (SeekBar) popupView.findViewById(R.id.seekBar2);
-        edit1 = popupView.findViewById(R.id.edit1);
-        edit2 = popupView.findViewById(R.id.edit2);
+        edit1 = popupView.findViewById(R.id.edadE);
+        edit2 = popupView.findViewById(R.id.generoE);
+        edit3 = popupView.findViewById(R.id.nombreE);
 
         textv1.setText(0 + "");
         textv2.setText(9999 + "");
+
+        edit3.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+
+                if (s.length()==0){
+
+                    final RealmResults<Persona> personas = realm.where(Persona.class).findAll();
+                    listPersonAdapter = new ListPersonAdapter(personas);
+                    if (personas.size() > 0) listView.setAdapter(listPersonAdapter);
+                    listPersonAdapter.notifyDataSetChanged();
+
+                }else {
+
+                    final RealmResults<Persona> personas = realm.where(Persona.class).contains("nombre",edit3.getText().toString()).findAll();
+                    listPersonAdapter = new ListPersonAdapter(personas);
+                    if(personas.size()>0) listView.setAdapter(listPersonAdapter);
+                    listPersonAdapter.notifyDataSetChanged();
+
+                    System.out.println(s.length());
+                }
+            }
+
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
 
         edit2.addTextChangedListener(new TextWatcher() {
 

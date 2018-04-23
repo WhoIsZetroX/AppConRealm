@@ -20,7 +20,6 @@
         <activity android:name=".AddPersonActivity" />
         <activity android:name=".EditPersonActivity" />
         <activity android:name=".PersonActivity" />
-        <activity android:name=".FilterActivity"></activity>
     </application>
 
 </manifest>
