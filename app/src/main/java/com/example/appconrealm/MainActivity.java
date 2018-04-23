@@ -15,9 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         context_ = getApplicationContext();
 
 
-       /* realm.executeTransaction(new Realm.Transaction() {
+        /*realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 for (int i = 1; i<7;i++) {
@@ -177,6 +181,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         edit1 = popupView.findViewById(R.id.edadE);
         edit2 = popupView.findViewById(R.id.generoE);
         edit3 = popupView.findViewById(R.id.nombreE);
+        RadioButton nombreR = popupView.findViewById(R.id.nombreR);
+        final LinearLayout nombres = popupView.findViewById(R.id.nombres);
+        RadioButton edadR = popupView.findViewById(R.id.edadR);
+        final LinearLayout edads = popupView.findViewById(R.id.edads);
+        RadioButton generoR = popupView.findViewById(R.id.generoR);
+        final LinearLayout generos = popupView.findViewById(R.id.generos);
+        RadioButton edadesR = popupView.findViewById(R.id.edadesR);
+        final LinearLayout edades = popupView.findViewById(R.id.edades);
+
+        nombres.setVisibility(View.VISIBLE);
+        edads.setVisibility(View.INVISIBLE);
+        generos.setVisibility(View.INVISIBLE);
+        edades.setVisibility(View.INVISIBLE);
+
+        nombreR.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+               @Override
+               public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                   if (isChecked) {nombres.setVisibility(View.VISIBLE);}else {nombres.setVisibility(View.INVISIBLE);}
+               }
+           }
+        );
+
+        edadR.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                               @Override
+                                               public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                                                   if (isChecked) {edads.setVisibility(View.VISIBLE);}else {edads.setVisibility(View.INVISIBLE);}
+                                               }
+                                           }
+        );
+
+        generoR.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                               @Override
+                                               public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                                                   if (isChecked) {generos.setVisibility(View.VISIBLE);}else {generos.setVisibility(View.INVISIBLE);}
+                                               }
+                                           }
+        );
+
+        edadesR.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                               @Override
+                                               public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                                                   if (isChecked) {edades.setVisibility(View.VISIBLE);}else {edades.setVisibility(View.INVISIBLE);}
+                                               }
+                                           }
+        );
+
 
         textv1.setText(0 + "");
         textv2.setText(9999 + "");

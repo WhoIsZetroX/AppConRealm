@@ -3,10 +3,13 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_gravity="center"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     card_view:cardCornerRadius="4dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,110 +17,182 @@
         android:background="@android:color/holo_blue_dark"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></LinearLayout>
-        <CheckBox
-            android:id="@+id/nombreC"
-            android:text="Nombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-
         <TextView
-            android:id="@+id/nombre"
             android:paddingTop="10dp"
+            android:text="Filtrar por..."
             android:layout_gravity="center_horizontal"
-            android:text="Buscar a alguien por el nombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/nombreE"
-            android:hint="Alexander"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/edad"
-            android:paddingTop="5dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Buscar a alguien con edad exacta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/nombreR"
+                    android:checked="true"
+                    android:text="Nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/edadE"
-            android:hint="20"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+                <RadioButton
+                    android:id="@+id/edadR"
+                    android:text="Edad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/generoR"
+                    android:text="Genero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/edadesR"
+                    android:text="2 edades"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintL"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/genero"
-            android:layout_gravity="center_horizontal"
-            android:text="Buscar por genero [M-F]"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/generoE"
-            android:hint="M-F"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="1"/>
-
-        <TextView
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/textv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/rangoEdad"
-            android:layout_gravity="center_horizontal"
-            android:text="Buscar a alguien entre dos edades"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/edadMin"
-            android:paddingTop="5dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Edad minima:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <SeekBar
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/seekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/edadMax"
-            android:paddingTop="5dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Edad Maxima:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <SeekBar
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/seekBar2"
+        <LinearLayout
+            android:id="@+id/nombres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:progress="100"/>
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/nombre"
+                android:paddingTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Buscar a alguien por el nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/nombreE"
+                android:hint="Alexander"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/edads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/edad"
+                android:paddingTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Buscar a alguien con edad exacta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edadE"
+                android:hint="20"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/generos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/genero"
+                android:layout_gravity="center_horizontal"
+                android:text="Buscar por genero [M-F]"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/generoE"
+                android:hint="M-F"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/edades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/rangoEdad"
+                android:layout_gravity="center_horizontal"
+                android:text="Buscar a alguien entre dos edades"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/edadMin"
+                android:paddingTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Edad minima:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/edadMax"
+                android:paddingTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Edad Maxima:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/seekBar2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:progress="100"/>
+        </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="Hacer tap fuera del popup para cerrarlo"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </android.support.v7.widget.CardView>
