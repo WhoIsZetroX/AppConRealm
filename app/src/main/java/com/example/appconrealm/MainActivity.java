@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static ListView listView;
     FloatingActionButton item_create, item_filter;
     FloatingActionMenu floatingActionMenu;
-    Button button, clearFilter,cerrarPopup;
+    Button button, clearFilter, cerrarPopup;
     Realm realm;
     public static ListPersonAdapter listPersonAdapter;
     int listViewPos;
@@ -86,18 +86,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         listView.setClickable(true);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println(adapterView.getSelectedView().getId() + " LALALALALA " + i);
-                //Intent intent = new Intent(Activity.this,destinationActivity.class);
-                //based on item add info to intent
-//                startActivity(intent);
-            }
-
-
-        });
-
+        /* :( No funciona: vvv
+         floatingActionMenu.setClosedOnTouchOutside(true);
+         */
         /* try {
 
             *//*final Persona p = new Persona(1,"qwer","asd","asd","asd","asd");

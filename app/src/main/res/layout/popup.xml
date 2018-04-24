@@ -189,7 +189,7 @@
         <TextView
             android:paddingTop="10dp"
             android:layout_marginBottom="10dp"
-            android:hint="Hacer tap fuera del popup para cerrarlo"
+            android:hint="### Hacer tap fuera del popup para cerrarlo ###"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

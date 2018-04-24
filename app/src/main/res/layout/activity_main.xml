@@ -76,7 +76,7 @@
         fab:menu_shadowRadius="4dp"
         fab:menu_shadowXOffset="1dp"
         fab:menu_shadowYOffset="3dp"
-        fab:menu_showShadow="true">
+        fab:menu_showShadow="true" >
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/item_create"
@@ -95,6 +95,7 @@
             fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
+
 
     <Button
         android:id="@+id/clearFilter"
