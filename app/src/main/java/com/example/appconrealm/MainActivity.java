@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 realm.copyToRealm(p3);
             }
         });*/
+
         findViewsByIds();
         setOnClicks();
 
@@ -86,23 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         listView.setClickable(true);
 
-        /* :( No funciona: vvv
-         floatingActionMenu.setClosedOnTouchOutside(true);
-         */
-        /* try {
-
-            *//*final Persona p = new Persona(1,"qwer","asd","asd","asd","asd");
-            realm.beginTransaction();
-            realm.copyToRealm(p); // This will do a deep copy of everything
-            realm.commitTransaction();*//*
-
-        }catch (RealmException r){
-            r.printStackTrace();
-        }finally {
-            realm.close();
-        }*/
-
     }
+
     void findViewsByIds(){
         floatingActionMenu = findViewById(R.id.fab);
         listView = findViewById(R.id.listView);
@@ -136,27 +122,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void abrirPopUp(){
-        /*final RealmResults<Persona> personas = realm.where(Persona.class).between("edad",20,80).findAll();
-        listPersonAdapter = new ListPersonAdapter(personas);
-        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-        listPersonAdapter.notifyDataSetChanged();*/
-//        button.setEnabled(false);
         layoutInflater =(LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         popupView = layoutInflater.inflate(R.layout.popup, null);
         popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.MATCH_PARENT,
                 RadioGroup.LayoutParams.WRAP_CONTENT);
 
         opciones();
-
-//        cerrarPopup = popupView.findViewById(R.id.cerrarPopup);
-        /*cerrarPopup.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-                button.setEnabled(true);
-            }
-        });*/
-
 
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(true);
@@ -218,7 +189,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                            }
         );
 
-
         textv1.setText(0 + "");
         textv2.setText(9999 + "");
 
@@ -263,18 +233,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }else {
 
-                        final RealmResults<Persona> personas = realm.where(Persona.class).contains("genero",edit2.getText().toString()).findAll();
-                        listPersonAdapter = new ListPersonAdapter(personas);
-                        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
+                    final RealmResults<Persona> personas = realm.where(Persona.class).contains("genero",edit2.getText().toString()).findAll();
+                    listPersonAdapter = new ListPersonAdapter(personas);
+                    if(personas.size()>0) listView.setAdapter(listPersonAdapter);
+                    listPersonAdapter.notifyDataSetChanged();
 
-                    System.out.println(s.length());
                 }
             }
-
-
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
@@ -320,7 +286,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
         edit1.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -350,17 +315,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     System.out.println(s.length());
                 }
             }
-
-
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
-
-
     }
-
-
 
 }

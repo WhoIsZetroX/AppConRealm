@@ -65,7 +65,7 @@ public class PersonActivity extends AppCompatActivity {
                 }
                 persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()),genero.getText().toString());
                 Intent i = new Intent(new Intent(PersonActivity.this, EditPersonActivity.class));
-                i.putExtra("lala", new String[]{""+persona.getEspecialId(), ""+persona.getId(), persona.getDni(), persona.getNombre(), persona.getApellido(), ""+persona.getEdad()});
+                i.putExtra("lala", new String[]{""+persona.getEspecialId(), ""+persona.getId(), persona.getDni(), persona.getNombre(), persona.getApellido(), ""+persona.getEdad(), persona.getGenero()});
                 startActivity(i);
             }
         });
