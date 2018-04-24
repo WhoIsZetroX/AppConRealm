@@ -152,6 +152,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RadioButton edadesR = popupView.findViewById(R.id.edadesR);
         final LinearLayout edades = popupView.findViewById(R.id.edades);
 
+        final RadioButton peque = popupView.findViewById(R.id.peque);
+        final RadioButton exacta = popupView.findViewById(R.id.exacta);
+        final RadioButton grande = popupView.findViewById(R.id.grande);
+
         nombres.setVisibility(View.VISIBLE);
         edads.setVisibility(View.INVISIBLE);
         generos.setVisibility(View.INVISIBLE);
@@ -190,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         );
 
         textv1.setText(0 + "");
-        textv2.setText(9999 + "");
+        textv2.setText(100 + "");
 
         edit3.addTextChangedListener(new TextWatcher() {
 
@@ -232,11 +236,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     listPersonAdapter.notifyDataSetChanged();
 
                 }else {
-
-                    final RealmResults<Persona> personas = realm.where(Persona.class).contains("genero",edit2.getText().toString()).findAll();
-                    listPersonAdapter = new ListPersonAdapter(personas);
-                    if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-                    listPersonAdapter.notifyDataSetChanged();
+                        final RealmResults<Persona> personas = realm.where(Persona.class).contains("genero",edit2.getText().toString().toUpperCase()).findAll();
+                        listPersonAdapter = new ListPersonAdapter(personas);
+                        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
+                        listPersonAdapter.notifyDataSetChanged();
 
                 }
             }
@@ -302,10 +305,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     try {
                         int num = Integer.parseInt(edit1.getText().toString());
                         Log.i("",num+" is a number");
-                        final RealmResults<Persona> personas = realm.where(Persona.class).equalTo("edad",Integer.parseInt(edit1.getText().toString())).findAll();
-                        listPersonAdapter = new ListPersonAdapter(personas);
-                        if(personas.size()>0) listView.setAdapter(listPersonAdapter);
-                        listPersonAdapter.notifyDataSetChanged();
+
+                        if (peque.isChecked()){
+                            final RealmResults<Persona> personas = realm.where(Persona.class).lessThan("edad",Integer.parseInt(edit1.getText().toString())).findAll();
+                            listPersonAdapter = new ListPersonAdapter(personas);
+                            if(personas.size()>0) listView.setAdapter(listPersonAdapter);
+                            listPersonAdapter.notifyDataSetChanged();
+                        }else if (exacta.isChecked()){
+                            final RealmResults<Persona> personas = realm.where(Persona.class).equalTo("edad",Integer.parseInt(edit1.getText().toString())).findAll();
+                            listPersonAdapter = new ListPersonAdapter(personas);
+                            if(personas.size()>0) listView.setAdapter(listPersonAdapter);
+                            listPersonAdapter.notifyDataSetChanged();
+                        }else if (grande.isChecked()){
+                            final RealmResults<Persona> personas = realm.where(Persona.class).greaterThan("edad",Integer.parseInt(edit1.getText().toString())).findAll();
+                            listPersonAdapter = new ListPersonAdapter(personas);
+                            if(personas.size()>0) listView.setAdapter(listPersonAdapter);
+                            listPersonAdapter.notifyDataSetChanged();
+                        }
+
+
                     } catch (NumberFormatException e) {
                         Toast.makeText(getApplicationContext(),"Introduce un numero",Toast.LENGTH_SHORT).show();
                     }
@@ -319,6 +337,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
 }

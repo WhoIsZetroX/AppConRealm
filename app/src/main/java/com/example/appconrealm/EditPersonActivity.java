@@ -69,7 +69,7 @@ public class EditPersonActivity extends AppCompatActivity {
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()),genero.getText().toString());
+                        persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()),genero.getText().toString().toUpperCase());
                         realm.copyToRealmOrUpdate(persona);
                     }
                 });

@@ -60,9 +60,9 @@
         android:id="@+id/genero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="genero"
+        android:hint="genero [M-F]"
         android:layout_marginBottom="10dp"
-        />
+        android:maxLength="1" />
 
         <Button
         android:id="@+id/sendData"

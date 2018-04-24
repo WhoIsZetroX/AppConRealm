@@ -94,6 +94,34 @@
             android:orientation="vertical"
             android:layout_gravity="center_horizontal">
 
+            <RadioGroup
+                android:id="@+id/rg2"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:layout_gravity="center"
+                    android:id="@+id/peque"
+                    android:text="Más pequeña"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/exacta"
+                    android:text="Exacta"
+                    android:checked="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/grande"
+                    android:text="Más grande"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
+
             <TextView
                 android:id="@+id/edad"
                 android:paddingTop="5dp"
@@ -187,7 +215,7 @@
         </android.support.constraint.ConstraintLayout>
 
         <TextView
-            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_marginBottom="10dp"
             android:hint="### Hacer tap fuera del popup para cerrarlo ###"
             android:layout_gravity="center_horizontal"
