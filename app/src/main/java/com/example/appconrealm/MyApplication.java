@@ -23,11 +23,13 @@ public class MyApplication extends Application {
         *
         * */
 
-        RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm").build();
+        RealmConfiguration config = new RealmConfiguration.Builder().name("default.realm")
+                .schemaVersion(1)
+                .migration(new Migration())
+                .build();
 
-        Realm realm = Realm.getInstance(config);
+        Realm.setDefaultConfiguration(config);
 
-        System.out.println(realm.getPath() + " LALALALA");
 
     }
 }

@@ -59,7 +59,7 @@ public class ListPersonAdapter extends RealmBaseAdapter<Persona> implements List
 
         Persona item = adapterData.get(position);
         viewHolder.txvTitol.setText(item.getNombre()+" "+item.getApellido());
-        viewHolder.txvVersio.setText("ID: "+item.getId());
+        viewHolder.txvVersio.setText("ID: "+item.getId() + " EDAD: "+item.getAñoNacimiento());
         viewHolder.btn.setHint(item.getId()+"");
         viewHolder.btn.setOnClickListener(new View.OnClickListener() {
             @Override

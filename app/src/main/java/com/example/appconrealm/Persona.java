@@ -26,6 +26,9 @@ public class Persona extends RealmObject {
     @Index
     private String dni;
 
+    @Index
+    private int añoNacimiento;
+
     private String nombre, apellido, genero;
     private int edad;
 
@@ -40,6 +43,14 @@ public class Persona extends RealmObject {
     }
 
     public Persona() {}
+
+    public int getAñoNacimiento() {
+        return añoNacimiento;
+    }
+
+    public void setAñoNacimiento(int añoNacimiento) {
+        this.añoNacimiento = añoNacimiento;
+    }
 
     public int getEspecialId() {
         return especialId;
