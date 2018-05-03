@@ -9,11 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 import io.realm.Realm;
 
 public class PersonActivity extends AppCompatActivity {
-    TextView especialId, id, dni, nombre, apellido, edad, genero;
-    //EditText dni, nombre, apellido, edad;
+    TextView especialId, id, dni, nombre, apellido, edad, añoNacimiento, genero;
     String[] lala;
     Persona persona;
     Button sendData;
@@ -43,6 +44,7 @@ public class PersonActivity extends AppCompatActivity {
         nombre.setHint(persona.getNombre());
         apellido.setHint(persona.getApellido());
         edad.setHint(persona.getEdad()+"");
+        añoNacimiento.setHint(Calendar.getInstance().get(Calendar.YEAR)-persona.getEdad()+"");
         genero.setHint(persona.getGenero());
 
         sendData.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +83,7 @@ public class PersonActivity extends AppCompatActivity {
         edad = findViewById(R.id.edad);
         genero = findViewById(R.id.genero);
         sendData = findViewById(R.id.sendData);
+        añoNacimiento = findViewById(R.id.añoNacimiento);
 
     }
 

@@ -38,9 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button button, clearFilter, cerrarPopup;
     Realm realm;
     public static ListPersonAdapter listPersonAdapter;
-    int listViewPos;
-    RealmResults<Persona> personas;
-    //public static String id;
     public static Context context_;
     public static Intent intentViewPerson;
     SeekBar seekbar, seekbar2;
@@ -60,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         context_ = getApplicationContext();
 
 
-        /*realm.executeTransaction(new Realm.Transaction() {
+        /* // Crear gente de prueba //
+        realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 for (int i = 1; i<7;i++) {
