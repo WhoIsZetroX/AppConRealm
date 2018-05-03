@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import io.realm.Realm;
 
@@ -70,6 +71,7 @@ public class EditPersonActivity extends AppCompatActivity {
                     @Override
                     public void execute(Realm realm) {
                         persona.setAll(Integer.parseInt(especialId.getText().toString()), Integer.parseInt(id.getText().toString()), dni.getText().toString(), nombre.getText().toString(),apellido.getText().toString(), Integer.parseInt(edad.getText().toString()),genero.getText().toString().toUpperCase());
+                        persona.setAñoNacimiento(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(edad.getText().toString()));
                         realm.copyToRealmOrUpdate(persona);
                     }
                 });

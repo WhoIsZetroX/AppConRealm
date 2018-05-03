@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 import io.realm.Realm;
 
 public class AddPersonActivity extends AppCompatActivity {
@@ -77,6 +79,7 @@ public class AddPersonActivity extends AppCompatActivity {
                         public void execute(Realm realm) {
                             int especial = Integer.parseInt(especialId.getText().toString());
                             Persona persona = new Persona(especial,Integer.parseInt(id.getText().toString()),dni.getText().toString(),nombre.getText().toString(),apellido.getText().toString(),Integer.parseInt(edad.getText().toString()),genero.getText().toString().toUpperCase());
+                            persona.setAñoNacimiento(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(edad.getText().toString()));
                             realm.copyToRealm(persona); // This will do a deep copy of everything
                         }
                     });
